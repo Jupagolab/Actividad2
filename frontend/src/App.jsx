@@ -19,7 +19,7 @@ function App() {
         </nav>
         <button className='bg-verde-300 text-verde-700 rounded-lg px-3 py-1 lg:px-6 lg:py-3 border border-solid'>Cerrar Sesión</button>
       </header>
-      <main className="grid grid-cols-1 items-center text-center gap-6 p-4 bg-verde-500 min-h-4/5">
+      <main className="flex flex-wrap text-center p-4 bg-verde-500 min-h-4/5">
         <h2>Bienvenidos</h2>
         <Lista 
           api={API}
