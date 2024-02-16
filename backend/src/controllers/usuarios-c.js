@@ -16,7 +16,7 @@ class UsuarioController {
       await nuevoUsuario.save();
 
       // Crear un token para el nuevo usuario
-      const token = jwt.sign({ 'usuario': usuario }, SECRET, { expiresIn: '1h' });
+      const token = jwt.sign({ 'usuario': usuario, 'rol': rol }, SECRET, { expiresIn: '1h' });
 
       res.json({ 'token': token, mensaje: 'Usuario registrado con éxito' });
     } catch (error) {

@@ -24,6 +24,10 @@ const inventarioEsquema = new Schema({
   precio: {
     type: Number,
     required: true
+  },
+  imagen: {
+    type: String,
+    required: true
   }
 },{
   timestamps: true

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { SECRET } = process.env;
+const encriptarContrasena = require('./bcrypt');
 
 const verificarToken = (req, res, next) => {
   const token = req.header('Authorization');
