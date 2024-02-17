@@ -1,12 +1,22 @@
-//import { useState } from 'react'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 import Modal from './assets/modal';
 import Lista from './assets/Lista';
-
 
 function App() {
   const API_INVENTARIO = 'http://localhost:4000/inventario/';
   const API_USUARIO = 'http://localhost:4000/usuarios/';
+  const [alerts, setAlerts] = useState([]);
+
+  const addAlert = (message, type) => {
+    const newAlert = { message, type };
+    setAlerts([...alerts, newAlert]);
+    setTimeout(() => removeAlert(newAlert), 5000);
+  };
+
+  const removeAlert = (alertToRemove) => {
+    setAlerts(alerts.filter(alert => alert !== alertToRemove));
+  };
 
   return (
     <>
@@ -28,10 +38,21 @@ function App() {
         />
         <Modal
           api={API_USUARIO}
+          addAlert={addAlert}
         />
       </main>
+      {/* Renderiza las alertas */}
+      <div className="alerts">
+        {alerts.map((alert, index) => (
+          <div key={index} className={`alert ${alert.type}`}>
+            {alert.message}
+            <button onClick={() => removeAlert(alert)}>Cerrar</button>
+          </div>
+        ))}
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
+
