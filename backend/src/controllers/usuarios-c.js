@@ -7,9 +7,9 @@ class UsuarioController {
   crearUsuario = async (req, res) => {
     try {
       await bcrypt.encriptarContrasenaMiddleware(req, res, async () => {
-        const { usuario, nombre, correo, clave, rol } = req.body;
+        const { usuario, nombre, correo, clave, telefono,rol } = req.body;
 
-        const nuevoUsuario = new usuarios({ usuario, nombre, correo, clave, rol });
+        const nuevoUsuario = new usuarios({ usuario, nombre, correo, clave, telefono, rol });
         await nuevoUsuario.save();
 
         res.json({ mensaje: 'Usuario registrado con éxito' });

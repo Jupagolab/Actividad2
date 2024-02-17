@@ -6,7 +6,12 @@ const usuariosC = require('../controllers/usuarios-c');
 // REGISTRAR USUARIO
 router.post('/registrar', (req, res)=>{
   usuariosC.crearUsuario(req, res);
-})
+});
+
+// LOGGEAR USUARIO
+router.post('/login', (req, res)=>{
+  usuariosC.iniciarSesion(req, res);
+});
 
 
 module.exports = router;

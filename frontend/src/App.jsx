@@ -5,8 +5,8 @@ import Lista from './assets/Lista';
 
 
 function App() {
-  const API = 'http://localhost:4000/inventario/';
-  //const [count, setCount] = useState(0)
+  const API_INVENTARIO = 'http://localhost:4000/inventario/';
+  const API_USUARIO = 'http://localhost:4000/usuarios/';
 
   return (
     <>
@@ -24,10 +24,11 @@ function App() {
       <main className="flex flex-wrap text-center p-4 bg-verde-500 min-h-4/5">
         <h2>Bienvenidos</h2>
         <Lista 
-
-          api={API}
+          api={API_INVENTARIO}
         />
-        <Modal/>
+        <Modal
+          api={API_USUARIO}
+        />
       </main>
     </>
   )

@@ -50,6 +50,9 @@ const Lista = ({ api }) => {
           </div>
         ))}
       </div>
+      <div>
+        <button className="bg-verde-300 rounded-2xl px-6 p-1.5">Agregar</button>
+      </div>
     </div>
   )
 }
