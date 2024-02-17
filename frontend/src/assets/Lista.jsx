@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const Lista = ({ api }) => {
+const Lista = ({ api, addAlert }) => {
   const [inventario, setInventario] = useState([]);
 
   useEffect(() => {
@@ -8,18 +8,17 @@ const Lista = ({ api }) => {
       await fetch(api)
         .then(res => res.json())
         .then(data => {
-          //filtra productos con al menos una existencia en el inventario
+          // Filtra productos con al menos una existencia en el inventario
           const productosFiltrados = data.filter(producto => producto.cantidad > 0);
           setInventario(productosFiltrados);
         })
         .catch(err => {
-          console.log(err)
-
+          console.log(err);
+          addAlert("Error al cargar el inventario", "error"); // Agrega una alerta de error
         });
-    }
+    };
     buscar();
-  }, [inventario])
-
+  }, [api, addAlert]);
 
   return (
     <div className="grid grid-cols-1 items-center text-center gap-4">

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 
-function Modal({ api }) {
-  const [formData, setFormData] = useState({
+function Modal({ api, addAlert }) {
+  const initialState = {
     nombre: '',
     apellido: '',
     usuario: '',
@@ -10,7 +10,9 @@ function Modal({ api }) {
     email: '',
     telefono: '',
     rol: 'usuario', // Por defecto, el rol es usuario
-  });
+  };
+
+  const [formData, setFormData] = useState(initialState);
   const [showModal, setShowModal] = useState(false);
   const modalRef = useRef(null);
 
@@ -38,14 +40,19 @@ function Modal({ api }) {
     // Aquí puedes manejar el envío de los datos, como enviarlos a un servidor
     registrarUsuario(`${api}/registrar`, formData);
     setShowModal(false);
+    clearForm(); // Limpia el formulario después de enviarlo
+  };
+
+  const clearForm = () => {
+    setFormData(initialState); // Establece el estado del formulario en su estado inicial
   };
 
   const registrarUsuario = async (api, formData) => {
     const { usuario, nombre, apellido, email, contraseña, confirmarContraseña, rol, telefono } = formData;
 
     if (contraseña !== confirmarContraseña) {
-      console.log([contraseña, confirmarContraseña])
-      alert("Las contraseñas no coinciden");
+      addAlert("Las contraseñas no coinciden", "error"); // Agrega una alerta de error
+      return;
     }
 
     await fetch(api, {
@@ -64,10 +71,13 @@ function Modal({ api }) {
     })
       .then(res => res.json())
       .then(data => {
-        window.alert(data.mensaje);
+        addAlert(data.mensaje, "success"); // Agrega una alerta de éxito
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => {
+        console.log(err);
+        addAlert("Ocurrió un error al registrar usuario", "error"); // Agrega una alerta de error
+      });
+  };
 
   return (
     <div>
@@ -99,5 +109,4 @@ function Modal({ api }) {
 }
 
 export default Modal;
-
 
